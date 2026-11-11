@@ -1,0 +1,195 @@
+{
+    "dataset_path": "C:\\Users\\villa\\Downloads\\dataset_limpio.csv",
+    "total_samples": 149116,
+    "train_samples": 119292,
+    "test_samples": 29824,
+    "feature_columns": [
+        "estacion_id",
+        "month",
+        "day_of_week",
+        "hour",
+        "store_id",
+        "unit_price",
+        "transaction_qty",
+        "revenue",
+        "beverage_temp_enc"
+    ],
+    "classes": [
+        "Bakery",
+        "Branded",
+        "Coffee",
+        "Coffee beans",
+        "Drinking Chocolate",
+        "Flavours",
+        "Loose Tea",
+        "Packaged Chocolate",
+        "Tea"
+    ],
+    "feature_importances": {
+        "estacion_id": 0.0006,
+        "month": 0.0014,
+        "day_of_week": 0.0026,
+        "hour": 0.0051,
+        "store_id": 0.0018,
+        "unit_price": 0.4024,
+        "transaction_qty": 0.0265,
+        "revenue": 0.257,
+        "beverage_temp_enc": 0.3027
+    },
+    "experiments": [
+        {
+            "experimento": "Exp 1: Baseline",
+            "modelo": "Random Forest Base (Sin Poda / Default)",
+            "hiperparametros": "n_estimators=100, max_depth=None, min_samples_split=2",
+            "train_accuracy": 0.8536,
+            "test_accuracy": 0.7831,
+            "test_f1_weighted": 0.7823,
+            "test_precision_weighted": 0.7844,
+            "test_recall_weighted": 0.7831,
+            "train_time_sec": 1.05,
+            "inference_time_sec": 0.36,
+            "diagnostico": "Overfitting severo (85.36% en Train vs. 78.31% en Test)"
+        },
+        {
+            "experimento": "Exp 2: Ajuste A",
+            "modelo": "Random Forest Poda Severa (Árboles Superficiales)",
+            "hiperparametros": "n_estimators=50, max_depth=4, min_samples_split=20",
+            "train_accuracy": 0.7559,
+            "test_accuracy": 0.7568,
+            "test_f1_weighted": 0.7382,
+            "test_precision_weighted": 0.7635,
+            "test_recall_weighted": 0.7568,
+            "train_time_sec": 0.33,
+            "inference_time_sec": 0.12,
+            "diagnostico": "Underfitting (75.59% en Train, 75.68% en Test)"
+        },
+        {
+            "experimento": "Exp 3: Optimizado (Ganador)",
+            "modelo": "Random Forest Optimizado (Poda Regularizada)",
+            "hiperparametros": "n_estimators=120, max_depth=12, min_samples_split=10, min_samples_leaf=4",
+            "train_accuracy": 0.8117,
+            "test_accuracy": 0.8048,
+            "test_f1_weighted": 0.8009,
+            "test_precision_weighted": 0.8264,
+            "test_recall_weighted": 0.8048,
+            "train_time_sec": 0.99,
+            "inference_time_sec": 0.3,
+            "diagnostico": "Modelo Ganador / Óptimo (81.17% en Train, 80.48% en Test)"
+        }
+    ],
+    "winner": {
+        "experimento": "Exp 3: Optimizado (Ganador)",
+        "modelo": "Random Forest Optimizado (Poda Regularizada)",
+        "hiperparametros": "n_estimators=120, max_depth=12, min_samples_split=10, min_samples_leaf=4",
+        "train_accuracy": 0.8117,
+        "test_accuracy": 0.8048,
+        "test_f1_weighted": 0.8009,
+        "test_precision_weighted": 0.8264,
+        "test_recall_weighted": 0.8048,
+        "train_time_sec": 0.99,
+        "inference_time_sec": 0.3,
+        "diagnostico": "Modelo Ganador / Óptimo (81.17% en Train, 80.48% en Test)"
+    },
+    "confusion_matrix": [
+        [
+            4559,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            149,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            7691,
+            0,
+            1,
+            0,
+            0,
+            0,
+            3992
+        ],
+        [
+            0,
+            5,
+            0,
+            346,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            1112,
+            0,
+            1182,
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1358,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            242,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            97,
+            0
+        ],
+        [
+            0,
+            0,
+            711,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8379
+        ]
+    ],
+    "classification_report": "                    precision    recall  f1-score   support\n\n            Bakery       1.00      1.00      1.00      4559\n           Branded       0.97      1.00      0.98       149\n            Coffee       0.81      0.66      0.73     11684\n      Coffee beans       1.00      0.99      0.99       351\nDrinking Chocolate       1.00      0.52      0.68      2294\n          Flavours       1.00      1.00      1.00      1358\n         Loose Tea       1.00      1.00      1.00       242\nPackaged Chocolate       1.00      1.00      1.00        97\n               Tea       0.68      0.92      0.78      9090\n\n          accuracy                           0.80     29824\n         macro avg       0.94      0.90      0.91     29824\n      weighted avg       0.83      0.80      0.80     29824\n"
+}
